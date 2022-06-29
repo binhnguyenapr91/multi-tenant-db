@@ -8,6 +8,14 @@ import java.sql.Timestamp;
  */
 
 public class Adapter {
+    String id;
+    String adapterId;
+    String adapterName;
+    Timestamp createdTime;
+    String createdBy;
+    Timestamp modifiedTime;
+    String modifiedBy;
+
     public Adapter(String id, String adapterId, String adapterName, Timestamp createdTime, String createdBy, Timestamp modifiedTime, String modifiedBy) {
         this.id = id;
         this.adapterId = adapterId;
@@ -77,11 +85,16 @@ public class Adapter {
         this.modifiedBy = modifiedBy;
     }
 
-    String id;
-    String adapterId;
-    String adapterName;
-    Timestamp createdTime;
-    String createdBy;
-    Timestamp modifiedTime;
-    String modifiedBy;
+    @Override
+    public String toString() {
+        return "Adapter{" +
+                "id='" + id + '\'' +
+                ", adapterId='" + adapterId + '\'' +
+                ", adapterName='" + adapterName + '\'' +
+                ", createdTime=" + createdTime +
+                ", createdBy='" + createdBy + '\'' +
+                ", modifiedTime=" + modifiedTime +
+                ", modifiedBy='" + modifiedBy + '\'' +
+                '}';
+    }
 }

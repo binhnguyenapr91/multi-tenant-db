@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: Binh Nguyen
@@ -13,18 +15,21 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfiguration {
 
-    private final com.example.demo.config.DataSourceProperties dataSourceProperties;
+    private final DataSourceFactory dataSourceFactory;
 
-    public DataSourceConfiguration(DataSourceProperties dataSourceProperties) {
-        this.dataSourceProperties = dataSourceProperties;
+    public DataSourceConfiguration(DataSourceFactory dataSourceFactory) {
+        this.dataSourceFactory = dataSourceFactory;
     }
 
     @Bean
     public DataSource dataSource() {
-        TenantRoutingDataSource customDataSource;
-        customDataSource = new TenantRoutingDataSource();
-        customDataSource.setTargetDataSources(
-                dataSourceProperties.getDatasources());
+        Map<Object, Object> targetDataSourceMap = new HashMap<>();
+        for (String tenantId: dataSourceFactory.getDataSourceMap().keySet()) {
+            targetDataSourceMap.put(tenantId, dataSourceFactory.getDataSourceMap().get(tenantId));
+        }
+
+        TenantRoutingDataSource customDataSource = new TenantRoutingDataSource();
+        customDataSource.setTargetDataSources(targetDataSourceMap);
         return customDataSource;
     }
 }
