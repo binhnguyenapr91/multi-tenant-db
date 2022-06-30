@@ -67,6 +67,11 @@ public class DataSourceFactory {
         return this.dataSourceMap;
     }
 
+    public void updateDataSourceMap(DbConnectionInfo dbConnectionInfo) throws Exception {
+        HikariDataSource ds = createDataSource(dbConnectionInfo);
+        dataSourceMap.put(dbConnectionInfo.getTenantId(), ds);
+    }
+
     @PreDestroy
     public void onDestroy() {
         for (String tenantId: dataSourceMap.keySet()) {

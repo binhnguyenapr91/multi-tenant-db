@@ -32,17 +32,6 @@ public class DbConnectionInfoPool {
 
         dbConnectionInfoMap.put(connectionInfo1.getTenantId(), connectionInfo1);
 
-        DbConnectionInfo connectionInfo2 = new DbConnectionInfo();
-        connectionInfo2.setTenantId("tenant2");
-        connectionInfo2.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        connectionInfo2.setHost("localhost");
-        connectionInfo2.setPort("3306");
-        connectionInfo2.setDbName("base_adapter_db_tenant2");
-        connectionInfo2.setUsername("root");
-        connectionInfo2.setPassword("Sysadmin1234$");
-
-        dbConnectionInfoMap.put(connectionInfo2.getTenantId(), connectionInfo2);
-
         L.info("initDbConnectionMap");
         for (String item: dbConnectionInfoMap.keySet()) {
             L.info("dbConnectionInfoMap item: " + dbConnectionInfoMap.get(item).toString());

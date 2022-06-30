@@ -21,7 +21,7 @@ public class DataSourceConfiguration {
         this.dataSourceFactory = dataSourceFactory;
     }
 
-    @Bean
+    @Bean("myDataSourceBean")
     public DataSource dataSource() {
         Map<Object, Object> targetDataSourceMap = new HashMap<>();
         for (String tenantId: dataSourceFactory.getDataSourceMap().keySet()) {
